@@ -2,7 +2,7 @@
 
 buildDunePackage rec {
   pname = "parany";
-  version = "8.0.0";
+  version = "12.0.3";
 
   useDune2 = true;
 
@@ -10,7 +10,7 @@ buildDunePackage rec {
     owner = "UnixJunkie";
     repo   = pname;
     rev    = "v${version}";
-    sha256 = "19yz1yqyqx6gawy93jlh3x6vji2p9qsy6nsbj65q5pii8p1fjlsm";
+    sha256 = "1j962ak68kvv62bczjqxwlwvdgcvjfcs36qwq12nnm0pwlzkhg33";
   };
 
   propagatedBuildInputs = [ ocamlnet cpu ];
