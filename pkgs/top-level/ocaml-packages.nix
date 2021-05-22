@@ -762,6 +762,8 @@ let
 
     mparser =  callPackage ../development/ocaml-modules/mparser { };
 
+    mparser-pcre =  callPackage ../development/ocaml-modules/mparser-pcre { };
+
     mtime =  callPackage ../development/ocaml-modules/mtime { };
 
     mustache =  callPackage ../development/ocaml-modules/mustache { };
