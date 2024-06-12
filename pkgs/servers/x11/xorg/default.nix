@@ -2458,11 +2458,11 @@ self: with self; {
   # THIS IS A GENERATED FILE.  DO NOT EDIT!
   xconsole = callPackage ({ stdenv, pkg-config, fetchurl, libX11, libXaw, libXmu, xorgproto, libXt, wrapWithXFileSearchPathHook, testers }: stdenv.mkDerivation (finalAttrs: {
     pname = "xconsole";
-    version = "1.0.8";
+    version = "1.1.0";
     builder = ./builder.sh;
     src = fetchurl {
-      url = "mirror://xorg/individual/app/xconsole-1.0.8.tar.xz";
-      sha256 = "195vhqjrzjf4kkzmy0kx50n1bv2kj9fg7mi18mm2w3p4d3q6ljkv";
+      url = "mirror://xorg/individual/app/xconsole-1.1.0.tar.xz";
+      sha256 = "128i77kn5pfrcrw31p90cb97g8a5y5173admr3gpdnndr9w5jxqc";
     };
     hardeningDisable = [ "bindnow" "relro" ];
     strictDeps = true;
@@ -3898,11 +3898,11 @@ self: with self; {
   # THIS IS A GENERATED FILE.  DO NOT EDIT!
   xkeyboardconfig = callPackage ({ stdenv, pkg-config, fetchurl, testers }: stdenv.mkDerivation (finalAttrs: {
     pname = "xkeyboard-config";
-    version = "2.41";
+    version = "2.42";
     builder = ./builder.sh;
     src = fetchurl {
-      url = "mirror://xorg/individual/data/xkeyboard-config/xkeyboard-config-2.41.tar.xz";
-      sha256 = "13vjvyg1fjvsqzqkpxzigvv94v154mcb2gba4d80spi9aywxcb7h";
+      url = "mirror://xorg/individual/data/xkeyboard-config/xkeyboard-config-2.42.tar.xz";
+      sha256 = "01q8gs7lnx9d7iz29pal7a3whz7njmgjcpzhy82wa7zhq6znxc56";
     };
     hardeningDisable = [ "bindnow" "relro" ];
     strictDeps = true;
