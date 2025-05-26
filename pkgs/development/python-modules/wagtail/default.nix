@@ -1,5 +1,6 @@
 {
   lib,
+  buildNpmPackage,
   buildPythonPackage,
   fetchFromGitHub,
 
@@ -28,11 +29,10 @@
   # tests
   callPackage,
 }:
-
-buildPythonPackage rec {
+let
   pname = "wagtail";
+
   version = "6.4.1";
-  pyproject = true;
 
   src = fetchFromGitHub {
     owner = "wagtail";
@@ -40,6 +40,30 @@ buildPythonPackage rec {
     tag = "v${version}";
     hash = "sha256-2qixbJK3f+3SBnsfVEcObFJmuBvE2J9o3LIkILZQRLQ=";
   };
+
+  assets = buildNpmPackage {
+    pname = "${pname}-assets";
+    inherit version src;
+    npmDepsHash = "sha256-tTTuDymthW3OuhRszcItJbJzHx8HHb/sDg824a0fVTw=";
+
+    installPhase = ''
+      runHook preInstall
+
+      mkdir $out
+
+      for static_dir in wagtail/*/static; do
+        cp --parents -r $static_dir $out
+      done
+
+      runHook postInstall
+    '';
+  };
+in
+
+buildPythonPackage rec {
+  inherit pname version src;
+
+  pyproject = true;
 
   build-system = [
     setuptools
@@ -64,6 +88,10 @@ buildPythonPackage rec {
     telepath
     willow
   ] ++ willow.optional-dependencies.heif;
+
+  preBuild = ''
+    cp -r ${assets}/wagtail .
+  '';
 
   # Tests are in separate derivation because they require a package that depends
   # on wagtail (wagtail-factories)
