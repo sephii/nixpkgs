@@ -18,11 +18,15 @@
 
   pytestCheckHook,
   pytest-cov-stub,
+  pytest-asyncio,
+  uvloop,
+  httpx,
+  h2,
 }:
 
 buildPythonPackage rec {
   pname = "gunicorn";
-  version = "23.0.0";
+  version = "25.1.0";
   pyproject = true;
 
   disabled = pythonOlder "3.7";
@@ -31,7 +35,7 @@ buildPythonPackage rec {
     owner = "benoitc";
     repo = "gunicorn";
     tag = version;
-    hash = "sha256-Dq/mrQwo3II6DBvYfD1FHsKHaIlyHlJCZ+ZyrM4Efe0=";
+    hash = "sha256-r0xkHGU1+5oQH1BXowUKi8FVQ+DqYU3MCYwn8chXf34=";
   };
 
   build-system = [ setuptools ];
@@ -51,8 +55,22 @@ buildPythonPackage rec {
   nativeCheckInputs = [
     pytestCheckHook
     pytest-cov-stub
+    pytest-asyncio
+    uvloop
+    httpx
+    h2
   ]
   ++ lib.flatten (lib.attrValues optional-dependencies);
+
+  pytestFlags = [
+    "-vvvvv"
+    "-k"
+    "test_basic_request"
+  ];
+
+  disabledTests = lib.optionals (lib.versionOlder eventlet.version "0.40.3") [
+    "TestEventletWorkerAlpn"
+  ];
 
   meta = {
     description = "WSGI HTTP Server for UNIX, fast clients and sleepy applications";
